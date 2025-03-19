@@ -1,3 +1,7 @@
+"""
+建立两个节点,名为test_node1和test_node2,其中test_node2依赖于test_node1.
+"""
+
 from dag_workflow import DAGEngine, DAGNode
 from dag_workflow import PrintObserver
 
@@ -11,9 +15,7 @@ class TestNode(DAGNode):
         super().__init__(node_id, node_task, node_dependencies, node_condition)
 
     def _print(self, context):
-        print(self.node_id)
-        if self.node_id == "test_node2":
-            raise Exception("shit")
+        print(f"{self.node_id} is executing...")
         return f"{self.node_id} finished"
 
 
