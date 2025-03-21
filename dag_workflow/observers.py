@@ -1,11 +1,12 @@
 import json
 
-from dag_workflow.datamodel import (
+from .datamodel import (
     Event,
     ErrorEvent,
     ChangeEvent,
 )
-from dag_workflow.datamodel import WorkflowErrorEvent, NodeErrorEvent
+from .datamodel import WorkflowErrorEvent, NodeErrorEvent
+from .console import Panel, console
 
 
 class Observer:
@@ -15,9 +16,7 @@ class Observer:
 
 class PrintObserver(Observer):
     def on_status_change(self, event: Event):
-        ## 带有颜色的输出
         if isinstance(event, ChangeEvent):
-            ## 红色输出:
             print(
                 f"\033[1;32m[Observer]\033[0m{json.dumps(event.to_dict(), ensure_ascii=False)}"
             )
@@ -25,3 +24,19 @@ class PrintObserver(Observer):
             print(
                 f"\033[1;31m[Observer]\033[0m{json.dumps(event.to_dict(), ensure_ascii=False)}"
             )
+            if isinstance(event, WorkflowErrorEvent):
+                console.print(
+                    Panel(
+                        event.message,
+                        title=f"WorkflowError-[bold]{event.location} [/bold]",
+                        style="red",
+                    )
+                )
+            elif isinstance(event, NodeErrorEvent):
+                console.print(
+                    Panel(
+                        event.message,
+                        title=f"NodeError-[bold]{event.location} [/bold]",
+                        style="red",
+                    )
+                )

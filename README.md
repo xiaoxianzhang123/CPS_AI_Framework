@@ -12,28 +12,26 @@
 
 2. 安装dag_workflow到虚拟环境
 
-```
+```bash
 pip install -e .
 ```
 
-此时即可在代码中调用dag_workflow包中内容
-
-3.测试一下example吧!
+此时即可在代码中调用dag_workflow包中内容.测试一下example吧!
 
 ### todo
 
 新功能:
 
-- [X] 循环结构
+- [ ] 循环结构
 
 改进:
 
-- [X] 观察者改为异步
-- [X] 日志改异步
-- [X] 完善observer对各种event识别
-- [X] workflow error event初始化传递context有点不合理
+- [ ] 观察者改为异步
+- [ ] 日志改异步
+- [ ] 完善observer对各种event识别
+- [ ] workflow error event初始化传递context有点不合理
 
 测试:
 
-- [X] 错误测试
-- [X] 条件判断测试
+- [x] 错误测试
+- [ ] 条件判断测试

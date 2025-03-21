@@ -331,7 +331,7 @@ class DAGEngine:
         并且观察者也不会知道线程的运行情况，因为workflow线程已经寄了.但是真的能协作式关闭吗?
         """
         error_event = WorkflowErrorEvent(
-            context, location="_run_single_workflow", message=failed_message
+            context, location=str(context.run_id), message=failed_message
         )
         self._notify_observers(error_event)
         self._change_workflow_status(context, WorkflowStatus.FAILED)
